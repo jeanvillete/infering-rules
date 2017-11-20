@@ -1,0 +1,95 @@
+Infering Rules, Data API
+
+As;
+	a solo/external application
+I wish;
+	I could provide as an http request a JSON object with some preliminary data to an exposed api, hence the infering-rules must apply some 'from to' and then check whether the 'required fields' set were suppressed.
+	It is also desired to be able to customize data rules 'from to' and 'required fields' for a specific application (numerous different external applications are going to make use of this exposed api) 
+
+Required Features;
+	* Both rules 'from to' and 'required fields' have to be customized in some data structure (JSON would be a good option) on the infering-rules application, in order to accomplish these rules for the data infering request.
+
+Requirements;
+	[Application Id]
+	* The application identifier has to be provided as the 'application-id' key header (http request) field.
+	*** If it's not provided the 'application-id' key header, a bad request with a meaningful related message is sent back as response.
+	*** If no rule has be provided/customized for the received 'application-id', a bad request with a meaningful related message is sent back as response.
+
+	[The http header 'rule-id']
+	* It 'CAN' be provided/customized 'from to' and 'required fields' rules for a specific application with a specific 'rule-id', this way on the requesting to infering-rules it has to be provided this header key (http request) field, e.g; rule-id : my-identified-structure
+
+	[Generic Rule]
+	* For some application, on providing/customizing its both 'from to' and 'required fields' rules, it 'CAN' be as a general rule for the entire application when even a 'rule-id' is provided or not.
+	*** This Generic data structure 'CANNOT' have a 'rule-id' on its definition.
+	*** For this Generic data structure 'CAN' have an 'applyToAll' property (true|false) which defaults to false, i.e;
+		applyToAll = false (default); It's applied only for requests that no 'structure-id' is provided.
+		applyToAll = true; It's applied 'ALONG' for a specific 'structure-id' definition (in this case two 'from to' and 'required fields' are applied) or for requests that no 'structure-id' is provided.
+
+	['rule' Definition]
+	* A field 'description' may be provided to a rule instance.
+
+	['condition' Definition]
+	The conditions are present on rules in order to check whether the 'to' values are going to be set or not.
+	* A list of conditions must be possible to be provided, for 'and' and 'or' condition.
+	* Provide a way to be able to set functions for the conditions;
+		equals || notEquals # One parameter; For String; Case Insensitive; check whether exist the provided key and if the second parameter equals the value on the provided key
+		exist || notExist # One parameter; check whether exist the provided key
+		isEmtpy || notEmtpy # For String; One parameter; check whether exist the provided key and if its value is 'string'
+		isNull || notNull # One parameter; check whether exist the provided key and if its value is 'null'
+		greaterThan || lessThan # For Numbers; Two parameters; If the value corresponding to any of the parameters is not a Number, raise a meaningful exception.
+
+	['from-to' Definition]
+	* Only one 'from' id field can be provided for a 'from-to' rule, underneath an application.
+	* Multiple 'to' values
+	* ON_NOT_FOUND = [KEEP | NULL | BLANK]
+
+	['required-fields' Definition]
+
+Data Structure;
+...
+  "application" : {
+      "id" : "",
+      "generic-rule" : {
+          "apply-to-all" : true,
+          from-to-list" : [
+                  { // a 'from-to' instance
+                      "description" : "",
+                      "conditions" : {
+                          "or" : [ ],
+                          "and : []
+                      },
+                      "fields" : [
+                          { // a 'field' instance
+                              "key" : "",
+                              "value" : ""
+                          }
+                      ]
+                  }
+              ],
+              "required-fields" : [ // not null and not empty
+              ]
+      },
+      "rules" : [
+          { // a 'rule' instance
+              "id" : "",
+              "from-to-list" : [
+                  { // a 'from-to' instance
+                      "description" : "",
+                      "conditions" : {
+                          "or" : [ ],
+                          "and : []
+                      },
+                      "fields" : [
+                          { // a 'field' instance
+                              "key" : "",
+                              "value" : ""
+                          }
+                      ]
+                  }
+              ],
+              "required-fields" : [ // not null and not empty
+              ]
+          }
+      ]
+  }
+...

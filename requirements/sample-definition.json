@@ -1,0 +1,121 @@
+{
+    "applications" : [
+        {
+            "id" : "my-first-application-definition",
+            "generic-rule" : {
+                "apply-to-all" : true,
+                "from-to-list" : [
+                    { // a 'from-to' instance
+                        "description" : "a complex 'from-to' rule",
+                        "conditions" : {
+                            "and" : [
+                                "equals( $rootObject.propertyH, myStringValueFoo )",
+                                "notEquals( $rootObject.propertyG, myStringValue )",
+                                "exist( $rootObject.propertyA )",
+                                "notExist( $rootObject.propertyZ )",
+                                "isEmtpy( $rootObject.propertyC )",
+                                "notEmtpy( $rootObject.propertyC )",
+                                "isNull( $rootObject.propertyD )",
+                                "notNull( $rootObject.propertyD )",
+                                "greaterThan( $rootObject.propertyA, 0 )",
+                                "lessThan( $rootObject.propertyB, 101 )"
+                            ], "or" : [
+                                "equals( $rootObject.propertyH, myStringValueFoo )",
+                                "notEquals( $rootObject.propertyG, myStringValue )",
+                                "exist( $rootObject.propertyA )",
+                                "notExist( $rootObject.propertyZ )",
+                                "isEmtpy( $rootObject.propertyC )",
+                                "notEmtpy( $rootObject.propertyC )",
+                                "isNull( $rootObject.propertyD )",
+                                "notNull( $rootObject.propertyD )",
+                                "greaterThan( $rootObject.propertyA, 0 )",
+                                "lessThan( $rootObject.propertyB, 101 )"
+                            ]
+                        },
+                        "fields" : [
+                            { // a 'field' instance
+                                "key" : "rootObject.propertyH",
+                                "value" : "myStringValue"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyA",
+                                "value" : "sum( $rootObject.propertyA, 1.53 )"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyB",
+                                "value" : "minus( $rootObject.propertyB, 1.53 )"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyD",
+                                "value" : "date( $rootObject.propertyC, DD-MM-YYYY )"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyF",
+                                "value" : "string( $rootObject.propertyA )"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyG",
+                                "value" : "decimal( $rootObject.propertyA, 2 )"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyJ",
+                                "value" : "empty()"
+                            },{ // a 'field' instance
+                                "key" : "rootObject.propertyK",
+                                "value" : "null()"
+                            }
+                        ]
+                    }
+                ],
+                "required-fields" : [ // not null and not empty
+                    "rootObject.propertyA",
+                    "rootObject.propertyB",
+                    "rootObject.propertyC",
+                    "rootObject.propertyD",
+                    "rootObject.propertyW",
+                    "rootObject.propertyX"
+                ]
+            },
+            "rules" : [
+                { // a 'rule' instance
+                    "id" : "my-sample-rule-id",
+                    "from-to-list" : [
+                        { // a 'from-to' instance
+                            "description" : "a very basic 'from-to' rule",
+                            "conditions" : {
+                                "and" : [
+                                    "equals( $rootObject.propertyH, myStringValueFoo )"
+                                ]
+                            },
+                            "fields" : [
+                                { // a 'field' instance
+                                    "key" : "rootObject.propertyA",
+                                    "value" : "sum( $rootObject.propertyA, 1.53 )"
+                                }
+                            ]
+                        }
+                    ],
+                    "required-fields" : [ // not null and not empty
+                        "rootObject.propertyA"
+                    ]
+                },{ // a 'rule' instance
+                    "id" : "another-sample-rule-id",
+                    "from-to-list" : [
+                        { // a 'from-to' instance
+                            "description" : "another very basic 'from-to' rule",
+                            "conditions" : {
+                                "or" : [
+                                    "notNull( $rootObject.propertyD )"
+                                ]
+                            },
+                            "fields" : [
+                                { // a 'field' instance
+                                    "key" : "rootObject.propertyF",
+                                    "value" : "string( $rootObject.propertyA )"
+                                }
+                            ]
+                        }
+                    ],
+                    "required-fields" : [ // not null and not empty
+                        "rootObject.propertyW",
+                        "rootObject.propertyX"
+                    ]
+                }
+            ]
+        }
+    ]
+}
