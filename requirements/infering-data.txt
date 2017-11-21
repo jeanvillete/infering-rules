@@ -37,13 +37,14 @@ Requirements;
 		isEmtpy || notEmtpy # For String; One parameter; check whether exist the provided key and if its value is 'string'
 		isNull || notNull # One parameter; check whether exist the provided key and if its value is 'null'
 		greaterThan || lessThan # For Numbers; Two parameters; If the value corresponding to any of the parameters is not a Number, raise a meaningful exception.
+	['required-fields' Definition]
+	* It must be possible to provide a way to make reference to a key with a special character, such as the use of the dolar sign ( $ ) when needed as parameters within parentheses, e.g; $rootObject.propertyA
 
 	['from-to' Definition]
-	* Only one 'from' id field can be provided for a 'from-to' rule, underneath an application.
-	* Multiple 'to' values
-	* ON_NOT_FOUND = [KEEP | NULL | BLANK]
+	* It must be possible to provide a way to make reference to a key with a special character, such as the use of the dolar sign ( $ ) when needed as parameters within parentheses, e.g; $rootObject.propertyA
 
 	['required-fields' Definition]
+	* It must be possible to provide a way to make reference to a key with a special character, such as the use of the dolar sign ( $ ) when needed as parameters within parentheses, e.g; $rootObject.propertyA
 
 Data Structure;
 ...
