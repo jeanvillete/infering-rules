@@ -10,19 +10,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.inferingrules.datatype.DataTypeMapInstance.Name.*;
+
 /**
  * Created by jean on 12/17/17.
  */
 public interface DataType {
 
-    @FunctionalInterface
-    interface DataTypeMapInstance {
-        DataType instance( String checkValue );
-    }
-
-    Map< String, DataTypeMapInstance> DATA_TYPE_MAP = Collections.unmodifiableMap(
-        new HashMap<String, DataTypeMapInstance>() {{
-            put( "INTEGER", TypeInteger::new );
+    Map< String, DataTypeMapInstance > DATA_TYPE_MAP = Collections.unmodifiableMap(
+        new HashMap< String, DataTypeMapInstance >() {{
+            put( INTEGER.name(), TypeInteger::new );
         }}
     );
 
